@@ -2,9 +2,9 @@ import { MouseEvent } from "react";
 import moment from 'moment-timezone'
 
 interface IWatch {
-  time: number,
+  time: string,
   name: string,
-  deliteTime: MouseEvent<HTMLElement>,
+  deliteTime: MouseEvent<HTMLElement, MouseEvent>,
 }
 
 const Watch = ({time, name, deliteTime} : IWatch) => {

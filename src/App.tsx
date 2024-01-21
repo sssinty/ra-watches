@@ -5,7 +5,7 @@ import './App.css'
 
 function App() {
 
-  const [country, setContry] = useState('');
+  const [name, setName] = useState('');
   const [timeZone, setTimeZone] = useState('');
   const [state, setState] = useState<any>([]);
   const [timeStatus, setTimeStatus] = useState(false) 
@@ -17,12 +17,16 @@ function App() {
   }
 
   const handlerChange = (event : ChangeEventHandler<HTMLSelectElement>) : void => {
-    event.target.name === 'name-contry' ? setContry(event.target.value) : setTimeZone(event.target.value)
+    setTimeZone(event.target.value)
   }
 
-  const clickBtnAdd = (event : MouseEventHandler<HTMLButtonElement>) : void => {
-    if(timeZone.includes(country) === true && country && timeZone) {
-      setState([...state.filter(value => !value[country]), {[country]: timeZone}]);
+  const handlerChangeInput = (event : ChangeEventHandler<HTMLInputElement>) : void => {
+    setName(event.target.value)
+  }
+
+  const clickBtnAdd = () : void => {
+    if(timeZone) {
+      setState([...state.filter(value => !value[name]), {[name]: timeZone}]);
       setTimeStatus(true)
     }
   }
@@ -55,7 +59,7 @@ function App() {
 
   return (
     <div className='form-send'>
-        <FormTime addTimeContry={addTimeContry} clickBtnAdd={clickBtnAdd} handlerChange={handlerChange}/>
+        <FormTime addTimeContry={addTimeContry} clickBtnAdd={clickBtnAdd} handlerChange={handlerChange} handlerChangeInput={handlerChangeInput}/>
         {state.map((element, id) =>{
           for(const key in element) {
             return <Watch deliteTime={deliteTime} name={key} time={element[key]} key={id} />

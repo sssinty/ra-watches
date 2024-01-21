@@ -5,4 +5,4 @@ export const dataTimeZone = [
   {"Moscow": "Europe/Moscow"},
 ];
 
-export const dataContry = ["New York", "Tokyo", "London", "Moscow"];
+// export const dataContry = ["New York", "Tokyo", "London", "Moscow"];
