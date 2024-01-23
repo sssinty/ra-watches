@@ -16,19 +16,21 @@ function App() {
     event.preventDefault();
   }
 
-  const handlerChange = (event : ChangeEventHandler<HTMLSelectElement>) : void => {
-    setTimeZone(event.target.value)
+  const handlerChangeTimeZone = (event : ChangeEventHandler<HTMLInputElement>) : void => {
+    const ru = /[а-яё]+/i.test(event.target.value);
+    ru ? alert("Используйте латиницу") : setTimeZone(event.target.value)
   }
 
-  const handlerChangeInput = (event : ChangeEventHandler<HTMLInputElement>) : void => {
+  const handlerChangeName = (event : ChangeEventHandler<HTMLInputElement>) : void => {
     setName(event.target.value)
   }
 
   const clickBtnAdd = () : void => {
-    if(timeZone) {
+    if(timeZone && name) {
       setState([...state.filter(value => !value[name]), {[name]: timeZone}]);
       setTimeStatus(true)
     }
+ 
   }
 
   const deliteTime = (event : MouseEventHandler<HTMLButtonElement>) => {
@@ -59,7 +61,7 @@ function App() {
 
   return (
     <div className='form-send'>
-        <FormTime addTimeContry={addTimeContry} clickBtnAdd={clickBtnAdd} handlerChange={handlerChange} handlerChangeInput={handlerChangeInput}/>
+        <FormTime addTimeContry={addTimeContry} clickBtnAdd={clickBtnAdd} handlerChange={handlerChangeTimeZone} handlerChangeInput={handlerChangeName}/>
         {state.map((element, id) =>{
           for(const key in element) {
             return <Watch deliteTime={deliteTime} name={key} time={element[key]} key={id} />
