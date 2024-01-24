@@ -3,13 +3,13 @@ import { ChangeEventHandler } from "react";
 interface IInput {
   name: string,
   handlerChange: ChangeEventHandler<HTMLInputElement>,
-
+  type: string
 }
 
-const Input = ({name, handlerChange} : IInput) => {
+const Input = ({name, handlerChange, type} : IInput) => {
   return <> 
     <label>{name}</label>
-    <input type="text" onChange={handlerChange} />
+    <input type={type} onChange={handlerChange} />
   </>
 }
 

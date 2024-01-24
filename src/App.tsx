@@ -6,7 +6,7 @@ import './App.css'
 function App() {
 
   const [name, setName] = useState('');
-  const [timeZone, setTimeZone] = useState('');
+  const [timeZone, setTimeZone] = useState<number>();
   const [state, setState] = useState<any>([]);
   const [timeStatus, setTimeStatus] = useState(false) 
   let timeout;
@@ -17,8 +17,8 @@ function App() {
   }
 
   const handlerChangeTimeZone = (event : ChangeEventHandler<HTMLInputElement>) : void => {
-    const ru = /[а-яё]+/i.test(event.target.value);
-    ru ? alert("Используйте латиницу") : setTimeZone(event.target.value)
+   
+    event.target.value < 24 ? setTimeZone(event.target.value) : alert("Недопустимое значение") 
   }
 
   const handlerChangeName = (event : ChangeEventHandler<HTMLInputElement>) : void => {
@@ -26,7 +26,7 @@ function App() {
   }
 
   const clickBtnAdd = () : void => {
-    if(timeZone && name) {
+    if(timeZone != 24 && name) {
       setState([...state.filter(value => !value[name]), {[name]: timeZone}]);
       setTimeStatus(true)
     }
@@ -64,7 +64,7 @@ function App() {
         <FormTime addTimeContry={addTimeContry} clickBtnAdd={clickBtnAdd} handlerChange={handlerChangeTimeZone} handlerChangeInput={handlerChangeName}/>
         {state.map((element, id) =>{
           for(const key in element) {
-            return <Watch deliteTime={deliteTime} name={key} time={element[key]} key={id} />
+            return <Watch deliteTime={deliteTime} name={key} timeAdd={element[key]} key={id} />
           }
         })}  
     </div>

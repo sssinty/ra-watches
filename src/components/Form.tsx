@@ -14,8 +14,8 @@ const FormTime = ({addTimeContry, clickBtnAdd, handlerChange, handlerChangeInput
   return (
     <form action="form" onSubmit={addTimeContry}>
       <div className="form-container">
-        <Input handlerChange={handlerChangeInput} name="Название" />
-        <Input handlerChange={handlerChange} name="Временная зона" />
+        <Input type={'text'} handlerChange={handlerChangeInput} name="Название" />
+        <Input type={'number'} handlerChange={handlerChange} name="Временная зона" />
         {/* <SelectedList data={dataContry} name="name-contry" handlerChange={handlerChange} label="Название"/> */}
       </div>
       <button className="btn-add" onClick={clickBtnAdd}>Добавить</button>
